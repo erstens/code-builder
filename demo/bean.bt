@@ -1,0 +1,47 @@
+package com.zhaonongzi.tms.admin.bean;
+
+import com.zhaonongzi.tms.common.bean.AbstractNumberVO;
+/**
+ * ${beanName}实体类
+ * @author wang'ao
+ * @date ${beanName}
+ */
+public class ${beanName} extends AbstractNumberVO {
+
+
+    <%
+    for(map in columns){
+    %>
+    private ${map.mType} ${map.mName};
+    <%
+    }
+    %>
+
+
+    <%
+    for(map in columns){
+    %>
+    public ${map.mType} get${map.mNameFirstUpper}() {
+        return ${map.mName};
+    }
+
+    public void set${map.mNameFirstUpper}(${map.mType} ${map.mName}) {
+        this.${map.mName} = ${map.mName};
+    }
+    <%
+    }
+    %>
+
+    @Override
+    public String toString() {
+        return "${beanName}{" +
+                <%
+                    for(map in columns){
+                %>
+                ", ${map.mName}='" + ${map.mName} + "'" +
+                <%
+                    }
+                %>
+                "}";
+    }
+}
