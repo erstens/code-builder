@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * @author wang'ao
  * @version 1.0.0
  * @ClassName Connector.class
- * @Description todo by wang'ao(连接器)
+ * @Description by wang'ao(连接器)
  * @Date 2016/8/26 0026 下午 6:43
  */
 public class Connector {

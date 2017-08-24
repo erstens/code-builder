@@ -6,7 +6,7 @@ package cn.com.builder.db;/**
  * @author wang'ao
  * @version 1.0.0
  * @ClassName DBProperty.class
- * @Description todo by wang'ao(数据库属性)
+ * @Description by wang'ao(数据库属性)
  * @Date 2016/8/26 0026 下午 6:41
  */
 public class DBProperty {
