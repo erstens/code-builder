@@ -2,7 +2,9 @@ package cn.com.builder.core;
 
 import cn.com.builder.Config;
 import cn.com.builder.db.StatementExe;
-import cn.com.builder.utils.FileUtils;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
@@ -10,7 +12,9 @@ import org.beetl.core.resource.FileResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,10 +37,17 @@ public class CodeBuilder {
 
     public void toFile() {
         File dir = new File(Config.getFileTempletPath());
-        File[] templets = dir.listFiles();
+        List<File> templets = new ArrayList<>(FileUtils.listFiles(dir, TrueFileFilter.INSTANCE,TrueFileFilter.INSTANCE));
         for (File f : templets) {
-            String text = getCodeStr(f.getName());
-            FileUtils.createFile(text, Config.getFileOutPath() + File.separator + f.getName());
+            String relativePath = f.getPath().split(dir.getPath().replaceAll("\\\\","\\\\\\\\"))[1] ;
+            String relativeUrl = f.getPath().replaceAll("\\\\","/").split(dir.getPath().replaceAll("\\\\","/"))[1] ;
+            String text = getCodeStr(relativeUrl);
+            try {
+                FileUtils.writeStringToFile(new File(Config.getFileOutPath() + relativePath),text, Charsets.UTF_8);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -49,7 +60,7 @@ public class CodeBuilder {
             e.printStackTrace();
         }
         GroupTemplate gt = new GroupTemplate(resourceLoader, cfg);
-        Template t = gt.getTemplate("/" + temName);
+        Template t = gt.getTemplate(temName);
         t.binding(this.modalData);
         String str = t.render();
         return str;

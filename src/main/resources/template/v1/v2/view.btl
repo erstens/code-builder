@@ -1,0 +1,22 @@
+<h1>可用变量</h1>
+
+<p>
+    columns
+</p>
+    <%
+    for(map in columns){
+    %>
+        <p>以下是数据库自动生成</p>
+        name,${map.name}
+        comment,${map.comment}
+        isNullable,${map.isNullable}
+        type,${map.type}
+        key,${map.key}
+
+        <p>以下是在DempDecorate定义</p>
+        javaType,${map.javaType}
+        javaField,${map.javaField}
+    <%}%>
+
+<p>以下是在conf.properties定义</p>
+addon.label,${addonLabel}
