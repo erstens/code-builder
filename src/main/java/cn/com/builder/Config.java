@@ -20,9 +20,7 @@ public class Config {
     private static Map<String, String> propAddon;
     private static final String PATH = "/conf.properties";
 
-    private Config() {
-
-    }
+    private Config() {}
 
     private static Config config;
 

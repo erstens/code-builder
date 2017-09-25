@@ -51,7 +51,7 @@ public class CodeBuilder {
         }
     }
 
-    String getCodeStr(String temName) {
+    private String getCodeStr(String temName) {
         FileResourceLoader resourceLoader = new FileResourceLoader(Config.getFileTempletPath(), "utf-8");
         Configuration cfg = null;
         try {
